@@ -33,22 +33,20 @@ export default function App() {
       mobileNumber: userInfo?.mobile_number || "",
       };
     }
-  useEffect(() => {
+   useEffect(() => {
     setIsAuthLoading(true);
-       if (Cookies.get("userinfo")) {
-// We are here after a login
+    if (Cookies.get("userinfo")) {
          const userInfoCookie = Cookies.get("userinfo");
          sessionStorage.setItem("userInfo", userInfoCookie || "");
          Cookies.remove("userinfo");
          var userInfo = userInfoCookie ? JSON.parse(atob(userInfoCookie)) : {};
          setSignedIn(true);
          setUser(getMappedUser(userInfo));
-       } else if (sessionStorage.getItem("userInfo")) {
-// We have already logged in
+    } else if (sessionStorage.getItem("userInfo")) {
          var userInfo = JSON.parse(atob(sessionStorage.getItem("userInfo")!));
          setSignedIn(true);
          setUser(getMappedUser(userInfo));
-      } else {
+    } else {
          console.log("User is not signed in");
          if (
             window.location.pathname !== "/auth/login" &&
@@ -56,7 +54,7 @@ export default function App() {
            ) {
            window.location.pathname = "/auth/login";
            }
-          }
+        }
          setIsAuthLoading(false);
       }, []);
 
